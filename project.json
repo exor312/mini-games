@@ -3,9 +3,9 @@
     "project_id": "mini-games-001",
     "project_name": "Mini Games",
     "size_hint": "small",
-    "current_phase": "BUILD",
+    "current_phase": "DONE",
     "created_at": "2026-05-25T00:00:00Z",
-    "updated_at": "2026-05-25T05:00:35.846715+00:00"
+    "updated_at": "2026-05-25T07:38:23.651802+00:00"
   },
   "idea": {
     "raw_input": "A Flutter app containing mini games for different subjects (math, spelling, etc.) for ages 4-8. Includes progression: XP system, scoring, unlockable characters, daily streaks. Tiles on home screen, colorful playful design.",
@@ -36,8 +36,8 @@
       "retries": 0
     },
     "tests": {
-      "total": 0,
-      "passed": 0,
+      "total": 44,
+      "passed": 44,
       "coverage_pct": 0
     },
     "build": {
@@ -46,9 +46,12 @@
     }
   },
   "last_action": {
-    "phase": "BUILD",
+    "phase": "RELEASE",
     "action": "COMPLETE",
-    "message": "APK built successfully"
+    "message": "v1.1.0 released",
+    "tag": "v1.1.0",
+    "release_url": "https://github.com/exor312/mini-games/releases/tag/v1.1.0",
+    "apk_url": "https://github.com/exor312/mini-games/releases/download/v1.1.0/app-release.apk"
   },
   "last_error": null,
   "architecture": {
