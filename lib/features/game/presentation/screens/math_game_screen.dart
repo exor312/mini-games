@@ -23,6 +23,16 @@ class _MathGameScreenState extends ConsumerState<MathGameScreen> {
   Timer? _advanceTimer;
 
   @override
+  void initState() {
+    super.initState();
+    // Reset game state when entering the screen to prevent stale state
+    // from a previous completed game (e.g. user went Home then re-entered)
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(mathGameNotifierProvider.notifier).reset();
+    });
+  }
+
+  @override
   void dispose() {
     _advanceTimer?.cancel();
     super.dispose();

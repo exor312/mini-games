@@ -52,7 +52,10 @@ class ResultsScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () => context.go('/'),
+                    onPressed: () {
+                      ref.read(mathGameNotifierProvider.notifier).reset();
+                      context.go('/');
+                    },
                     child: const Text('Home'),
                   ),
                   const SizedBox(width: 16),
