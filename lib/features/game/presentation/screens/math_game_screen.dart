@@ -39,11 +39,10 @@ class _MathGameScreenState extends ConsumerState<MathGameScreen> {
     _advanceTimer?.cancel();
     _advanceTimer = Timer(const Duration(milliseconds: 1500), () {
       if (!mounted) return;
+      notifier.advance();
       final currentState = ref.read(mathGameNotifierProvider);
       if (currentState.isComplete) {
         _navigateToResults();
-      } else {
-        notifier.advance();
       }
     });
   }
