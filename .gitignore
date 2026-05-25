@@ -1,0 +1,28 @@
+# Flutter
+.dart_tool/
+.packages
+build/
+ios/
+macos/
+linux/
+windows/
+web/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+
+# Project specific
+project.json

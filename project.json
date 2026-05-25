@@ -1,0 +1,2347 @@
+{
+  "meta": {
+    "project_id": "mini-games-001",
+    "project_name": "Mini Games",
+    "size_hint": "small",
+    "current_phase": "REVIEW",
+    "created_at": "2026-05-25T00:00:00Z",
+    "updated_at": "2026-05-25T00:00:00Z"
+  },
+  "idea": {
+    "raw_input": "A Flutter app containing mini games for different subjects (math, spelling, etc.) for ages 4-8. Includes progression: XP system, scoring, unlockable characters, daily streaks. Tiles on home screen, colorful playful design.",
+    "clarifications": []
+  },
+  "phase_summary": {
+    "prd": {
+      "approved": true,
+      "approved_at": "2026-05-25T00:00:00Z"
+    },
+    "architecture": {
+      "approved": false,
+      "approved_at": null
+    },
+    "tickets": {
+      "total": 22,
+      "done": 0,
+      "in_review": 0,
+      "failed": 0
+    },
+    "code": {
+      "total_files": 21,
+      "generated": 21
+    },
+    "review": {
+      "passed": 22,
+      "failed": 0,
+      "retries": 0
+    },
+    "tests": {
+      "total": 0,
+      "passed": 0,
+      "coverage_pct": 0
+    },
+    "build": {
+      "apk_ready": false,
+      "ipa_ready": false
+    }
+  },
+  "last_action": {
+    "phase": "REVIEW",
+    "action": "COMPLETE",
+    "message": "Reviewed 22 tickets: 21 passed, 1 failed"
+  },
+  "last_error": null,
+  "architecture": {
+    "version": "1.0",
+    "drafted_at": "2026-05-25T00:00:00Z",
+    "approved": false,
+    "approved_at": null,
+    "decisions": {
+      "state_management": {
+        "package": "riverpod",
+        "version": "^2.5.0",
+        "pattern": "StateNotifier + Provider",
+        "justification": "5 screens, no real-time features, local-only data. Riverpod StateNotifier is sufficient for managing XP, scores, characters, and streaks."
+      },
+      "navigation": {
+        "package": "go_router",
+        "version": "^14.0.0",
+        "pattern": "simple named routes",
+        "justification": "5 screens, no auth guards, no deep links. Simple named routes are sufficient."
+      },
+      "local_storage": {
+        "package": "shared_preferences + isar",
+        "version": "^2.2.0 + ^3.0.0",
+        "justification": "SharedPreferences for simple key-value (XP, level, streak count, active character). Isar for structured game history records."
+      },
+      "api_client": {
+        "package": "none",
+        "version": null,
+        "justification": "No backend required. All data stored locally."
+      },
+      "auth": {
+        "package": null,
+        "token_storage": null,
+        "justification": "No auth required. Single-device local app."
+      },
+      "di": {
+        "package": "riverpod",
+        "justification": "Riverpod providers serve as the DI system. No additional DI package needed."
+      },
+      "config": {
+        "packages": [
+          [
+            "flutter_dotenv",
+            "^5.4.0"
+          ]
+        ]
+      },
+      "observability": {
+        "packages": [
+          [
+            "flutter_logs",
+            "^2.0.0"
+          ]
+        ],
+        "justification": "Small project. Local logging only."
+      }
+    },
+    "folder_structure": {
+      "lib": {
+        "main.dart": null,
+        "app.dart": null,
+        "core": {
+          "config": {},
+          "errors": {},
+          "extensions": {},
+          "utils": {},
+          "theme": {},
+          "widgets": {}
+        },
+        "features": {
+          "home": {
+            "data": {
+              "datasources": {},
+              "models": {},
+              "repositories": {}
+            },
+            "domain": {
+              "entities": {},
+              "repositories": {},
+              "usecases": {}
+            },
+            "presentation": {
+              "screens": {},
+              "widgets": {},
+              "providers": {}
+            }
+          },
+          "game": {
+            "data": {
+              "datasources": {},
+              "models": {},
+              "repositories": {}
+            },
+            "domain": {
+              "entities": {},
+              "repositories": {},
+              "usecases": {}
+            },
+            "presentation": {
+              "screens": {},
+              "widgets": {},
+              "providers": {}
+            }
+          },
+          "results": {
+            "data": {
+              "datasources": {},
+              "models": {},
+              "repositories": {}
+            },
+            "domain": {
+              "entities": {},
+              "repositories": {},
+              "usecases": {}
+            },
+            "presentation": {
+              "screens": {},
+              "widgets": {},
+              "providers": {}
+            }
+          },
+          "profile": {
+            "data": {
+              "datasources": {},
+              "models": {},
+              "repositories": {}
+            },
+            "domain": {
+              "entities": {},
+              "repositories": {},
+              "usecases": {}
+            },
+            "presentation": {
+              "screens": {},
+              "widgets": {},
+              "providers": {}
+            }
+          },
+          "streak": {
+            "data": {
+              "datasources": {},
+              "models": {},
+              "repositories": {}
+            },
+            "domain": {
+              "entities": {},
+              "repositories": {},
+              "usecases": {}
+            },
+            "presentation": {
+              "screens": {},
+              "widgets": {},
+              "providers": {}
+            }
+          }
+        },
+        "router": {
+          "app_router.dart": null
+        }
+      },
+      "assets": {
+        "images": {},
+        "icons": {},
+        "fonts": {}
+      },
+      "test": {
+        "unit": {},
+        "widget": {},
+        "golden": {},
+        "integration": {}
+      }
+    },
+    "screen_file_map": [
+      {
+        "screen_id": "SCR-001",
+        "screen_name": "Home",
+        "file_path": "lib/features/home/presentation/screens/home_screen.dart",
+        "feature_group": "home"
+      },
+      {
+        "screen_id": "SCR-002",
+        "screen_name": "Game",
+        "file_path": "lib/features/game/presentation/screens/game_screen.dart",
+        "feature_group": "game"
+      },
+      {
+        "screen_id": "SCR-003",
+        "screen_name": "Results",
+        "file_path": "lib/features/results/presentation/screens/results_screen.dart",
+        "feature_group": "results"
+      },
+      {
+        "screen_id": "SCR-004",
+        "screen_name": "Profile",
+        "file_path": "lib/features/profile/presentation/screens/profile_screen.dart",
+        "feature_group": "profile"
+      },
+      {
+        "screen_id": "SCR-005",
+        "screen_name": "Streak Calendar",
+        "file_path": "lib/features/streak/presentation/screens/streak_calendar_screen.dart",
+        "feature_group": "streak"
+      }
+    ],
+    "api_contracts": [],
+    "dependencies": {
+      "flutter_version": ">=3.19.0",
+      "dart_version": ">=3.3.0",
+      "packages": [
+        {
+          "name": "flutter_riverpod",
+          "version": "^2.5.0",
+          "purpose": "State management",
+          "dev_only": false
+        },
+        {
+          "name": "go_router",
+          "version": "^14.0.0",
+          "purpose": "Navigation",
+          "dev_only": false
+        },
+        {
+          "name": "shared_preferences",
+          "version": "^2.2.0",
+          "purpose": "Local key-value storage",
+          "dev_only": false
+        },
+        {
+          "name": "isar",
+          "version": "^3.0.0",
+          "purpose": "Local structured database for game history",
+          "dev_only": false
+        },
+        {
+          "name": "isar_flutter_libs",
+          "version": "^3.0.0",
+          "purpose": "Isar Flutter bindings",
+          "dev_only": false
+        },
+        {
+          "name": "flutter_dotenv",
+          "version": "^5.4.0",
+          "purpose": "Environment configuration",
+          "dev_only": false
+        },
+        {
+          "name": "flutter_logs",
+          "version": "^2.0.0",
+          "purpose": "Local logging",
+          "dev_only": false
+        },
+        {
+          "name": "equatable",
+          "version": "^2.0.5",
+          "purpose": "Value equality for models",
+          "dev_only": false
+        },
+        {
+          "name": "json_annotation",
+          "version": "^4.8.1",
+          "purpose": "JSON serialization annotations",
+          "dev_only": false
+        },
+        {
+          "name": "intl",
+          "version": "^0.19.0",
+          "purpose": "Date formatting for streak calendar",
+          "dev_only": false
+        },
+        {
+          "name": "flutter_test",
+          "version": "sdk",
+          "purpose": "Testing framework",
+          "dev_only": true
+        },
+        {
+          "name": "flutter_lints",
+          "version": "^4.0.0",
+          "purpose": "Linting rules",
+          "dev_only": true
+        },
+        {
+          "name": "build_runner",
+          "version": "^2.4.9",
+          "purpose": "Code generation",
+          "dev_only": true
+        },
+        {
+          "name": "json_serializable",
+          "version": "^6.7.1",
+          "purpose": "JSON code generation",
+          "dev_only": true
+        },
+        {
+          "name": "mocktail",
+          "version": "^1.0.3",
+          "purpose": "Mocking for tests",
+          "dev_only": true
+        }
+      ]
+    },
+    "open_questions": []
+  },
+  "prd": {
+    "version": "1.0",
+    "drafted_at": "2026-05-25T00:00:00Z",
+    "approved": false,
+    "approved_at": null,
+    "overview": {
+      "problem": "Children ages 4-8 need engaging, age-appropriate educational games that make learning math and spelling fun.",
+      "solution": "A colorful single-device app with mini-games for math and spelling that rewards children with XP, scores, unlockable characters, and daily streaks.",
+      "target_user": "Children ages 4-8 (and their parents who download the app).",
+      "success_metric": "Children complete at least one game session daily and parents report improved engagement with learning."
+    },
+    "screens": [
+      {
+        "id": "SCR-001",
+        "name": "Home",
+        "purpose": "Child selects a mini-game from a colorful grid of tile cards.",
+        "primary_actions": [
+          "Tap a game tile to start",
+          "View current level/XP on top bar",
+          "Tap character avatar to go to profile"
+        ],
+        "navigation_to": [
+          "SCR-002",
+          "SCR-004"
+        ]
+      },
+      {
+        "id": "SCR-002",
+        "name": "Game",
+        "purpose": "Child plays the selected mini-game and earns points.",
+        "primary_actions": [
+          "Answer questions/solve puzzles",
+          "See live score counter",
+          "Pause/quit button"
+        ],
+        "navigation_to": [
+          "SCR-003",
+          "SCR-001"
+        ]
+      },
+      {
+        "id": "SCR-003",
+        "name": "Results",
+        "purpose": "Shows the child their score and XP earned after finishing a game.",
+        "primary_actions": [
+          "View score and stars earned",
+          "View XP gained and level progress",
+          "Tap to go home or replay"
+        ],
+        "navigation_to": [
+          "SCR-001",
+          "SCR-002"
+        ]
+      },
+      {
+        "id": "SCR-004",
+        "name": "Profile",
+        "purpose": "Child views their unlocked characters, current level, and streak.",
+        "primary_actions": [
+          "View/select active character",
+          "View XP level progress",
+          "View daily streak calendar",
+          "See total games played"
+        ],
+        "navigation_to": [
+          "SCR-001"
+        ]
+      },
+      {
+        "id": "SCR-005",
+        "name": "Streak Calendar",
+        "purpose": "Shows daily login streak and streak rewards.",
+        "primary_actions": [
+          "View calendar with streak days highlighted",
+          "See current streak count",
+          "See reward milestones"
+        ],
+        "navigation_to": [
+          "SCR-004"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "id": "FEA-001",
+        "name": "Math Games",
+        "priority": "must_have",
+        "description": "Mini-games focused on basic arithmetic (addition, subtraction) with age-appropriate difficulty for ages 4-8.",
+        "screens_involved": [
+          "SCR-002",
+          "SCR-003"
+        ],
+        "acceptance_criteria": [
+          "Given the math game is open, when the child taps an answer, then the app provides immediate visual feedback (correct/incorrect).",
+          "Given a game session ends, when the child answers at least one question, then a score is calculated and displayed on the Results screen."
+        ]
+      },
+      {
+        "id": "FEA-002",
+        "name": "Spelling Games",
+        "priority": "must_have",
+        "description": "Mini-games focused on letter recognition and simple word spelling for early readers ages 4-8.",
+        "screens_involved": [
+          "SCR-002",
+          "SCR-003"
+        ],
+        "acceptance_criteria": [
+          "Given the spelling game is open, when the child selects or arranges letters, then the app provides feedback on correctness.",
+          "Given a spelling game session ends, when the child completes at least one word, then a score is calculated and displayed."
+        ]
+      },
+      {
+        "id": "FEA-003",
+        "name": "Home Screen",
+        "priority": "must_have",
+        "description": "Colorful tile-based home screen showing available games, current level/XP bar, and character avatar.",
+        "screens_involved": [
+          "SCR-001"
+        ],
+        "acceptance_criteria": [
+          "Given the app launches, when the Home screen loads, then the child sees a grid of at least 2 game tiles (math and spelling).",
+          "Given the Home screen is visible, when the child taps a game tile, then the corresponding Game screen opens.",
+          "Given the Home screen is visible, when the child taps the character avatar, then the Profile screen opens."
+        ]
+      },
+      {
+        "id": "FEA-004",
+        "name": "XP & Leveling System",
+        "priority": "must_have",
+        "description": "Earning XP from game sessions to level up. XP thresholds increase per level. Level displayed on Home bar.",
+        "screens_involved": [
+          "SCR-001",
+          "SCR-003",
+          "SCR-004"
+        ],
+        "acceptance_criteria": [
+          "Given a game session ends, when results are shown, then the child sees XP earned added to their total.",
+          "Given the child's XP crosses a level threshold, when returning to Home, then the level indicator updates to the new level."
+        ]
+      },
+      {
+        "id": "FEA-005",
+        "name": "Scoring System",
+        "priority": "must_have",
+        "description": "Each game session produces a score. Score based on correct answers, speed, and streak within the game.",
+        "screens_involved": [
+          "SCR-002",
+          "SCR-003"
+        ],
+        "acceptance_criteria": [
+          "Given a game is in play, when the child answers correctly, then the live score counter increases.",
+          "Given a game session ends, when the Results screen loads, then the total score is displayed with a star rating."
+        ]
+      },
+      {
+        "id": "FEA-006",
+        "name": "Unlockable Characters",
+        "priority": "must_have",
+        "description": "New characters unlock at specific XP level thresholds. Child can select any unlocked character as their avatar.",
+        "screens_involved": [
+          "SCR-004"
+        ],
+        "acceptance_criteria": [
+          "Given the child reaches a new level, when the Profile screen is opened, then a new character is available in the character selector.",
+          "Given the child selects an unlocked character, when returning to Home, then the character avatar updates to the selected character."
+        ]
+      },
+      {
+        "id": "FEA-007",
+        "name": "Daily Streaks",
+        "priority": "must_have",
+        "description": "Tracks consecutive days the child opens the app. Displayed as a calendar with highlights. Streak milestones give bonus XP.",
+        "screens_involved": [
+          "SCR-004",
+          "SCR-005"
+        ],
+        "acceptance_criteria": [
+          "Given the child opens the app on a new day, when the Home screen loads, then the streak count increments by 1.",
+          "Given the child opens the app on consecutive days, when viewing the Streak Calendar, then all consecutive days are highlighted.",
+          "Given the child breaks a streak (skips a day), when opening the app, then the streak resets to 1."
+        ]
+      }
+    ],
+    "auth": {
+      "required": false,
+      "methods": [],
+      "guest_mode": false
+    },
+    "data": {
+      "storage": "local",
+      "backend_required": false,
+      "backend_notes": null
+    },
+    "integrations": [],
+    "constraints": {
+      "platforms": [
+        "android"
+      ],
+      "min_flutter_version": "3.19.0",
+      "target_sdk": {
+        "android": 34
+      },
+      "offline_support": true,
+      "accessibility": "basic"
+    },
+    "out_of_scope": [
+      "Multiplayer or competitive features",
+      "Parent/teacher dashboard",
+      "In-app purchases or monetization",
+      "Voice/audio instructions",
+      "Cloud sync across devices",
+      "iOS support for v1",
+      "User accounts or authentication",
+      "More than 2 game types (math + spelling only for v1)"
+    ],
+    "open_questions": []
+  },
+  "tickets": [
+    {
+      "id": "T-001",
+      "title": "Create pubspec.yaml with all dependencies",
+      "file_path": "pubspec.yaml",
+      "feature_group": "foundation",
+      "layer": "config",
+      "type": "pubspec",
+      "points": 1,
+      "status": "pending",
+      "depends_on": [],
+      "description": "Set up pubspec.yaml with Flutter SDK constraints and all required dependencies from architecture.",
+      "inputs": [
+        "architecture.dependencies"
+      ],
+      "acceptance_criteria": [
+        "pubspec.yaml has all packages from architecture.dependencies",
+        "SDK constraint >=3.3.0 <4.0.0",
+        "flutter pub get runs without errors"
+      ]
+    },
+    {
+      "id": "T-002",
+      "title": "Create app theme and color tokens",
+      "file_path": "lib/core/theme/app_theme.dart",
+      "feature_group": "foundation",
+      "layer": "core",
+      "type": "config",
+      "points": 2,
+      "status": "pending",
+      "depends_on": [
+        "T-001"
+      ],
+      "description": "Define the app's Material3 theme with bright, playful color scheme for children ages 4-8.",
+      "inputs": [
+        "architecture.decisions.state_management"
+      ],
+      "acceptance_criteria": [
+        "AppTheme defines ThemeData with Material3 color scheme",
+        "Light theme uses bright, child-friendly colors",
+        "MaterialApp widget builds without errors on test run"
+      ]
+    },
+    {
+      "id": "T-003",
+      "title": "Create text styles",
+      "file_path": "lib/core/theme/text_styles.dart",
+      "feature_group": "foundation",
+      "layer": "core",
+      "type": "config",
+      "points": 1,
+      "status": "pending",
+      "depends_on": [
+        "T-001"
+      ],
+      "description": "Define reusable text styles for headings, body, and game text.",
+      "inputs": [],
+      "acceptance_criteria": [
+        "At least 4 text styles defined (heading, subheading, body, caption)",
+        "Styles use large, readable fonts for children"
+      ]
+    },
+    {
+      "id": "T-004",
+      "title": "Create failure classes",
+      "file_path": "lib/core/errors/failures.dart",
+      "feature_group": "foundation",
+      "layer": "core",
+      "type": "entity",
+      "points": 1,
+      "status": "pending",
+      "depends_on": [
+        "T-001"
+      ],
+      "description": "Define base Failure class for domain-layer error handling using freezed.",
+      "inputs": [],
+      "acceptance_criteria": [
+        "Base Failure class extends Equatable",
+        "CacheFailure and DatabaseFailure subclasses defined"
+      ]
+    },
+    {
+      "id": "T-005",
+      "title": "Create env config",
+      "file_path": "lib/core/config/env_config.dart",
+      "feature_group": "foundation",
+      "layer": "core",
+      "type": "config",
+      "points": 1,
+      "status": "pending",
+      "depends_on": [
+        "T-001"
+      ],
+      "description": "Environment configuration using flutter_dotenv. Defines app name constant.",
+      "inputs": [],
+      "acceptance_criteria": [
+        "EnvConfig class loads .env file",
+        "APP_NAME constant available",
+        "Graceful fallback if .env missing"
+      ]
+    },
+    {
+      "id": "T-006",
+      "title": "Create app constants",
+      "file_path": "lib/core/config/app_constants.dart",
+      "feature_group": "foundation",
+      "layer": "core",
+      "type": "config",
+      "points": 1,
+      "status": "pending",
+      "depends_on": [
+        "T-001"
+      ],
+      "description": "App-wide constants: XP thresholds per level, streak milestones, max levels, game types.",
+      "inputs": [
+        "FEA-004: XP & Leveling",
+        "FEA-007: Daily Streaks"
+      ],
+      "acceptance_criteria": [
+        "xpThresholdsForLevel(int level) returns int",
+        "Level 1 requires 0 XP, Level 2 requires 100 XP",
+        "Game types enum: math, spelling"
+      ]
+    },
+    {
+      "id": "T-007",
+      "title": "Create main.dart entry point",
+      "file_path": "lib/main.dart",
+      "feature_group": "foundation",
+      "layer": "core",
+      "type": "config",
+      "points": 1,
+      "status": "pending",
+      "depends_on": [
+        "T-001"
+      ],
+      "description": "App entry point. RunApp wrapper with ProviderScope and SharedPreferences initialization.",
+      "inputs": [
+        "architecture.decisions.state_management: Riverpod"
+      ],
+      "acceptance_criteria": [
+        "main() calls runApp inside ProviderScope",
+        "SharedPreferences initialized before app renders",
+        "App runs without crash"
+      ]
+    },
+    {
+      "id": "T-008",
+      "title": "Create app.dart root widget",
+      "file_path": "lib/app.dart",
+      "feature_group": "foundation",
+      "layer": "core",
+      "type": "config",
+      "points": 2,
+      "status": "pending",
+      "depends_on": [
+        "T-001",
+        "T-002"
+      ],
+      "description": "Root MaterialApp widget with go_router integration and theme setup.",
+      "inputs": [
+        "architecture.decisions.navigation: go_router",
+        "T-002: AppTheme"
+      ],
+      "acceptance_criteria": [
+        "MaterialApp uses AppTheme.lightTheme",
+        "Router configured via go_router",
+        "App displays without crash"
+      ]
+    },
+    {
+      "id": "T-009",
+      "title": "Create PlayerProgress entity",
+      "file_path": "lib/features/profile/domain/entities/player_progress.dart",
+      "feature_group": "profile",
+      "layer": "domain",
+      "type": "entity",
+      "points": 1,
+      "status": "pending",
+      "depends_on": [
+        "T-001"
+      ],
+      "description": "PlayerProgress domain entity holding totalXP, level, streakDays, lastPlayedDate, activeCharacterId.",
+      "inputs": [
+        "FEA-004: XP & Leveling",
+        "FEA-007: Daily Streaks",
+        "FEA-006: Unlockable Characters"
+      ],
+      "acceptance_criteria": [
+        "totalXP, level, streakDays, lastPlayedDate (DateTime), activeCharacterId fields",
+        "Extends Equatable"
+      ]
+    },
+    {
+      "id": "T-010",
+      "title": "Create PlayerProgress model with SharedPreferences",
+      "file_path": "lib/features/profile/data/models/player_progress_model.dart",
+      "feature_group": "profile",
+      "layer": "data",
+      "type": "model",
+      "points": 2,
+      "status": "pending",
+      "depends_on": [
+        "T-009"
+      ],
+      "description": "SharedPreferences-backed model for persisting player progress. Encodes/decodes to string format.",
+      "inputs": [
+        "T-009: PlayerProgress entity"
+      ],
+      "acceptance_criteria": [
+        "PlayerProgressModel with SharedPreferences save/load",
+        "encode() serializes to String",
+        "decode(String s) returns PlayerProgressModel",
+        "Forward-compatible: checks parts.length for optional fields"
+      ]
+    },
+    {
+      "id": "T-011",
+      "title": "Create UnlockableCharacter entity",
+      "file_path": "lib/features/profile/domain/entities/unlockable_character.dart",
+      "feature_group": "profile",
+      "layer": "domain",
+      "type": "entity",
+      "points": 1,
+      "status": "pending",
+      "depends_on": [
+        "T-001"
+      ],
+      "description": "UnlockableCharacter entity: id, name, iconKey, unlockLevel, colorScheme.",
+      "inputs": [
+        "FEA-006: Unlockable Characters"
+      ],
+      "acceptance_criteria": [
+        "id, name, iconKey, unlockLevel (int) fields",
+        "Extends Equatable",
+        "At least 5 predefined characters in a constant list (levels 1,3,5,8,12)"
+      ]
+    },
+    {
+      "id": "T-012",
+      "title": "Create UnlockableCharacter model",
+      "file_path": "lib/features/profile/data/models/character_model.dart",
+      "feature_group": "profile",
+      "layer": "data",
+      "type": "model",
+      "points": 2,
+      "status": "pending",
+      "depends_on": [
+        "T-011"
+      ],
+      "description": "SharedPreferences-backed model for persisting unlocked character IDs and active character.",
+      "inputs": [
+        "T-011: UnlockableCharacter entity",
+        "IconData icon key mapping pattern from orchestrator pitfalls"
+      ],
+      "acceptance_criteria": [
+        "CharacterModel with SharedPreferences save/load",
+        "iconKeyToData(String key) returns IconData using const map (NOT IconData(variable))",
+        "Store only iconKey strings, never IconData objects",
+        "Forward-compatible decode"
+      ]
+    },
+    {
+      "id": "T-013",
+      "title": "Create ProgressNotifier (Riverpod StateNotifier)",
+      "file_path": "lib/features/profile/presentation/providers/progress_notifier.dart",
+      "feature_group": "profile",
+      "layer": "presentation",
+      "type": "provider",
+      "points": 3,
+      "status": "pending",
+      "depends_on": [
+        "T-010",
+        "T-012",
+        "T-006"
+      ],
+      "description": "StateNotifier managing player progress state: XP, level, streak, active character, unlocked characters.",
+      "inputs": [
+        "architecture.decisions.state_management: Riverpod StateNotifier",
+        "T-010: PlayerProgressModel",
+        "T-012: CharacterModel",
+        "T-006: AppConstants"
+      ],
+      "acceptance_criteria": [
+        "ProgressNotifier extends StateNotifier<PlayerProgress>",
+        "addXP(int amount) increments totalXP and checks level up",
+        "incrementStreak() updates streak and lastPlayedDate",
+        "getUnlockedCharacters() returns list of unlocked characters",
+        "Level calculation uses xpThresholdsFrom AppConstants"
+      ]
+    },
+    {
+      "id": "T-014",
+      "title": "Create GameType enum and GameResult entity",
+      "file_path": "lib/features/game/domain/entities/game_result.dart",
+      "feature_group": "game",
+      "layer": "domain",
+      "type": "entity",
+      "points": 1,
+      "status": "pending",
+      "depends_on": [
+        "T-001"
+      ],
+      "description": "GameType enum (math, spelling). GameResult entity: gameType, score, xpEarned, playedAt, correctAnswers, totalQuestions.",
+      "inputs": [
+        "FEA-001: Math Games",
+        "FEA-002: Spelling Games",
+        "FEA-005: Scoring"
+      ],
+      "acceptance_criteria": [
+        "GameType.math and GameType.spelling values",
+        "GameResult has score, xpEarned, playedAt, correctAnswers, totalQuestions",
+        "Extends Equatable"
+      ]
+    },
+    {
+      "id": "T-015",
+      "title": "Create GameResult model",
+      "file_path": "lib/features/game/data/models/game_result_model.dart",
+      "feature_group": "game",
+      "layer": "data",
+      "type": "model",
+      "points": 2,
+      "status": "pending",
+      "depends_on": [
+        "T-014"
+      ],
+      "description": "SharedPreferences-backed model for persisting game history. Stores as JSON string list.",
+      "inputs": [
+        "T-014: GameResult entity"
+      ],
+      "acceptance_criteria": [
+        "GameResultModel with SharedPreferences save/load",
+        "encode() returns JSON string",
+        "decode(String s) returns GameResult",
+        "getHistory() returns List<GameResult> sorted by playedAt descending"
+      ]
+    },
+    {
+      "id": "T-016",
+      "title": "Create HomeScreen widget",
+      "file_path": "lib/features/home/presentation/screens/home_screen.dart",
+      "feature_group": "home",
+      "layer": "presentation",
+      "type": "screen",
+      "points": 5,
+      "status": "pending",
+      "depends_on": [
+        "T-003",
+        "T-008",
+        "T-013",
+        "T-012",
+        "T-006"
+      ],
+      "description": "Home screen with colorful tile grid of games, XP bar at top, character avatar. Tapping a tile navigates to game. Tapping avatar goes to profile.",
+      "inputs": [
+        "SCR-001: Home",
+        "FEA-003: Home Screen",
+        "T-013: ProgressNotifier",
+        "T-012: CharacterModel for avatar",
+        "T-006: AppConstants for game types"
+      ],
+      "acceptance_criteria": [
+        "HomeScreen extends ConsumerWidget",
+        "Grid of at least 2 game tiles (math + spelling) using GridView.count",
+        "XP progress bar showing current level progress",
+        "Character avatar icon at top-right, tappable to navigate to profile",
+        "Tiles are colorful cards with game icon and name",
+        "Navigator.push to game screen on tile tap using go_router"
+      ]
+    },
+    {
+      "id": "T-017",
+      "title": "Create GameTile card widget",
+      "file_path": "lib/features/home/presentation/widgets/game_tile.dart",
+      "feature_group": "home",
+      "layer": "presentation",
+      "type": "widget",
+      "points": 2,
+      "status": "pending",
+      "depends_on": [
+        "T-001"
+      ],
+      "description": "Reusable colorful card widget for displaying a game option on the home grid. Large icon, game name, playful colors.",
+      "inputs": [
+        "FEA-003: Home Screen"
+      ],
+      "acceptance_criteria": [
+        "GameTile accepts title, icon, colorRadius onTap",
+        "Uses Card with rounded corners and shadow",
+        "Large enough for small fingers (min 80x80 tap target)",
+        "Bright, playful color scheme from theme"
+      ]
+    },
+    {
+      "id": "T-018",
+      "title": "Create go_router app router",
+      "file_path": "lib/router/app_router.dart",
+      "feature_group": "foundation",
+      "layer": "router",
+      "type": "router",
+      "points": 2,
+      "status": "pending",
+      "depends_on": [
+        "T-016",
+        "T-008"
+      ],
+      "description": "go_router configuration with routes for all screens. Home as initial route.",
+      "inputs": [
+        "architecture.decisions.navigation: go_router",
+        "architecture.screen_file_map"
+      ],
+      "acceptance_criteria": [
+        "Router defines named route for each screen in screen_file_map",
+        "Home route ('/') is initial route",
+        "All routes use go_router's go() navigation"
+      ]
+    },
+    {
+      "id": "T-019",
+      "title": "Create GameScreen stub",
+      "file_path": "lib/features/game/presentation/screens/game_screen.dart",
+      "feature_group": "game",
+      "layer": "presentation",
+      "type": "screen",
+      "points": 2,
+      "status": "pending",
+      "depends_on": [
+        "T-001"
+      ],
+      "description": "Placeholder GameScreen showing game type title and a 'Coming Soon' message with back button. Will be expanded with actual game logic later.",
+      "inputs": [
+        "SCR-002: Game"
+      ],
+      "acceptance_criteria": [
+        "GameScreen accepts gameType parameter",
+        "Shows game type name as title",
+        "Has back button to return to home"
+      ]
+    },
+    {
+      "id": "T-020",
+      "title": "Create ResultsScreen stub",
+      "file_path": "lib/features/results/presentation/screens/results_screen.dart",
+      "feature_group": "results",
+      "layer": "presentation",
+      "type": "screen",
+      "points": 2,
+      "status": "pending",
+      "depends_on": [
+        "T-014",
+        "T-001"
+      ],
+      "description": "Placeholder ResultsScreen showing score and XP earned. Will be expanded later.",
+      "inputs": [
+        "SCR-003: Results"
+      ],
+      "acceptance_criteria": [
+        "ResultsScreen accepts score and xpEarned parameters",
+        "Displays score and XP with star rating placeholder",
+        "Has 'Play Again' and 'Home' buttons"
+      ]
+    },
+    {
+      "id": "T-021",
+      "title": "Create ProfileScreen stub",
+      "file_path": "lib/features/profile/presentation/screens/profile_screen.dart",
+      "feature_group": "profile",
+      "layer": "presentation",
+      "type": "screen",
+      "points": 3,
+      "status": "pending",
+      "depends_on": [
+        "T-013",
+        "T-012",
+        "T-001"
+      ],
+      "description": "Profile screen showing current character, level, XP progress, total games played, and streak. Uses ProgressNotifier.",
+      "inputs": [
+        "SCR-004: Profile",
+        "T-013: ProgressNotifier",
+        "T-012: CharacterModel"
+      ],
+      "acceptance_criteria": [
+        "ProfileScreen extends ConsumerWidget",
+        "Displays active character, level, XP progress bar",
+        "Shows total games played and streak count",
+        "Tappable streak section navigates to StreakCalendar"
+      ]
+    },
+    {
+      "id": "T-022",
+      "title": "Create StreakCalendarScreen stub",
+      "file_path": "lib/features/streak/presentation/screens/streak_calendar_screen.dart",
+      "feature_group": "streak",
+      "layer": "presentation",
+      "type": "screen",
+      "points": 3,
+      "status": "pending",
+      "depends_on": [
+        "T-013",
+        "T-001"
+      ],
+      "description": "Streak calendar screen showing monthly calendar with streak days highlighted. Current streak count displayed.",
+      "inputs": [
+        "SCR-005: Streak Calendar",
+        "FEA-007: Daily Streaks",
+        "T-013: ProgressNotifier"
+      ],
+      "acceptance_criteria": [
+        "StreakCalendarScreen extends ConsumerWidget",
+        "Shows current month calendar",
+        "Highlights days that are part of the streak",
+        "Displays current streak count",
+        "Shows reward milestones (3, 7, 14, 30 days)"
+      ]
+    }
+  ],
+  "sequence": [
+    {
+      "step": 1,
+      "tickets": [
+        "T-001"
+      ],
+      "parallel": false
+    },
+    {
+      "step": 2,
+      "tickets": [
+        "T-002",
+        "T-003",
+        "T-004",
+        "T-005",
+        "T-006"
+      ],
+      "parallel": true,
+      "parallel_group": "P-01"
+    },
+    {
+      "step": 3,
+      "tickets": [
+        "T-007",
+        "T-008"
+      ],
+      "parallel": false
+    },
+    {
+      "step": 4,
+      "tickets": [
+        "T-009",
+        "T-011"
+      ],
+      "parallel": true,
+      "parallel_group": "P-02"
+    },
+    {
+      "step": 5,
+      "tickets": [
+        "T-010",
+        "T-012",
+        "T-014"
+      ],
+      "parallel": true,
+      "parallel_group": "P-03"
+    },
+    {
+      "step": 6,
+      "tickets": [
+        "T-013",
+        "T-015"
+      ],
+      "parallel": false
+    },
+    {
+      "step": 7,
+      "tickets": [
+        "T-017"
+      ],
+      "parallel": false
+    },
+    {
+      "step": 8,
+      "tickets": [
+        "T-016"
+      ],
+      "parallel": false
+    },
+    {
+      "step": 9,
+      "tickets": [
+        "T-019",
+        "T-020",
+        "T-021",
+        "T-022"
+      ],
+      "parallel": true,
+      "parallel_group": "P-04"
+    },
+    {
+      "step": 10,
+      "tickets": [
+        "T-018"
+      ],
+      "parallel": false
+    }
+  ],
+  "reviews": {
+    "T-001": {
+      "ticket_id": "T-001",
+      "file_path": "pubspec.yaml",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "pubspec.yaml has all packages from architecture.dependencies",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "SDK constraint >=3.3.0 <4.0.0",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "flutter pub get runs without errors",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-002": {
+      "ticket_id": "T-002",
+      "file_path": "lib/core/theme/app_theme.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "AppTheme defines ThemeData with Material3 color scheme",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Light theme uses bright, child-friendly colors",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "MaterialApp widget builds without errors on test run",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-003": {
+      "ticket_id": "T-003",
+      "file_path": "lib/core/theme/text_styles.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "At least 4 text styles defined (heading, subheading, body, caption)",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Styles use large, readable fonts for children",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-004": {
+      "ticket_id": "T-004",
+      "file_path": "lib/core/errors/failures.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "Base Failure class extends Equatable",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "CacheFailure and DatabaseFailure subclasses defined",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-005": {
+      "ticket_id": "T-005",
+      "file_path": "lib/core/config/env_config.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "EnvConfig class loads .env file",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "APP_NAME constant available",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Graceful fallback if .env missing",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-006": {
+      "ticket_id": "T-006",
+      "file_path": "lib/core/config/app_constants.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "xpThresholdsForLevel(int level) returns int",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Level 1 requires 0 XP, Level 2 requires 100 XP",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Game types enum: math, spelling",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-007": {
+      "ticket_id": "T-007",
+      "file_path": "lib/main.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "main() calls runApp inside ProviderScope",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "SharedPreferences initialized before app renders",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "App runs without crash",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-008": {
+      "ticket_id": "T-008",
+      "file_path": "lib/app.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "MaterialApp uses AppTheme.lightTheme",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Router configured via go_router",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "App displays without crash",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-009": {
+      "ticket_id": "T-009",
+      "file_path": "lib/features/profile/domain/entities/player_progress.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "totalXP, level, streakDays, lastPlayedDate (DateTime), activeCharacterId fields",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Extends Equatable",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-010": {
+      "ticket_id": "T-010",
+      "file_path": "lib/features/profile/data/models/player_progress_model.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "PlayerProgressModel with SharedPreferences save/load",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "encode() serializes to String",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "decode(String s) returns PlayerProgressModel",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Forward-compatible: checks parts.length for optional fields",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-011": {
+      "ticket_id": "T-011",
+      "file_path": "lib/features/profile/domain/entities/unlockable_character.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "id, name, iconKey, unlockLevel (int) fields",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Extends Equatable",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "At least 5 predefined characters in a constant list (levels 1,3,5,8,12)",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-012": {
+      "ticket_id": "T-012",
+      "file_path": "lib/features/profile/data/models/character_model.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "CharacterModel with SharedPreferences save/load",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "iconKeyToData(String key) returns IconData using const map (NOT IconData(variable))",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Store only iconKey strings, never IconData objects",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Forward-compatible decode",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-013": {
+      "ticket_id": "T-013",
+      "file_path": "lib/features/profile/presentation/providers/progress_notifier.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "ProgressNotifier extends StateNotifier<PlayerProgress>",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "addXP(int amount) increments totalXP and checks level up",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "incrementStreak() updates streak and lastPlayedDate",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "getUnlockedCharacters() returns list of unlocked characters",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Level calculation uses xpThresholdsFrom AppConstants",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-014": {
+      "ticket_id": "T-014",
+      "file_path": "lib/features/game/domain/entities/game_result.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "GameType.math and GameType.spelling values",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "GameResult has score, xpEarned, playedAt, correctAnswers, totalQuestions",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Extends Equatable",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-015": {
+      "ticket_id": "T-015",
+      "file_path": "lib/features/game/data/models/game_result_model.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "GameResultModel with SharedPreferences save/load",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "encode() returns JSON string",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "decode(String s) returns GameResult",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "getHistory() returns List<GameResult> sorted by playedAt descending",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-016": {
+      "ticket_id": "T-016",
+      "file_path": "lib/features/home/presentation/screens/home_screen.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "HomeScreen extends ConsumerWidget",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Grid of at least 2 game tiles (math + spelling) using GridView.count",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "XP progress bar showing current level progress",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Character avatar icon at top-right, tappable to navigate to profile",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Tiles are colorful cards with game icon and name",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Navigator.push to game screen on tile tap using go_router",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-017": {
+      "ticket_id": "T-017",
+      "file_path": "lib/features/home/presentation/widgets/game_tile.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "GameTile accepts title, icon, colorRadius onTap",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Uses Card with rounded corners and shadow",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Large enough for small fingers (min 80x80 tap target)",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Bright, playful color scheme from theme",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-018": {
+      "ticket_id": "T-018",
+      "file_path": "lib/router/app_router.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "Router defines named route for each screen in screen_file_map",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Home route ('/') is initial route",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "All routes use go_router's go() navigation",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-019": {
+      "ticket_id": "T-019",
+      "file_path": "lib/features/game/presentation/screens/game_screen.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "GameScreen accepts gameType parameter",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Shows game type name as title",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Has back button to return to home",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-020": {
+      "ticket_id": "T-020",
+      "file_path": "lib/features/results/presentation/screens/results_screen.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "ResultsScreen accepts score and xpEarned parameters",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Displays score and XP with star rating placeholder",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Has 'Play Again' and 'Home' buttons",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-021": {
+      "ticket_id": "T-021",
+      "file_path": "lib/features/profile/presentation/screens/profile_screen.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "ProfileScreen extends ConsumerWidget",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Displays active character, level, XP progress bar",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Shows total games played and streak count",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Tappable streak section navigates to StreakCalendar",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-022": {
+      "ticket_id": "T-022",
+      "file_path": "lib/features/streak/presentation/screens/streak_calendar_screen.dart",
+      "reviewed_at": "2026-05-25T03:44:58.431617+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": [
+          {
+            "criterion": "StreakCalendarScreen extends ConsumerWidget",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Shows current month calendar",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Highlights days that are part of the streak",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Displays current streak count",
+            "status": "pass",
+            "reason": null
+          },
+          {
+            "criterion": "Shows reward milestones (3, 7, 14, 30 days)",
+            "status": "pass",
+            "reason": null
+          }
+        ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    }
+  }
+}
