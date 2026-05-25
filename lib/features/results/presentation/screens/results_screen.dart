@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class ResultsScreen extends StatelessWidget {
+import '../../../game/presentation/providers/math_game_notifier.dart';
+import '../../../game/presentation/screens/math_game_screen.dart';
+
+class ResultsScreen extends ConsumerWidget {
   const ResultsScreen({
     super.key,
     required this.score,
@@ -15,7 +19,7 @@ class ResultsScreen extends StatelessWidget {
   static const String routeName = 'results';
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final cs = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -53,7 +57,10 @@ class ResultsScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: 16),
                   OutlinedButton(
-                    onPressed: () => context.pop(),
+                    onPressed: () {
+                      ref.read(mathGameNotifierProvider.notifier).reset();
+                      context.go(MathGameScreen.routePath);
+                    },
                     child: const Text('Play Again'),
                   ),
                 ],
