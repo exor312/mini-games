@@ -3,9 +3,9 @@
     "project_id": "mini-games-001",
     "project_name": "Mini Games",
     "size_hint": "small",
-    "current_phase": "REVIEW",
+    "current_phase": "BUILD",
     "created_at": "2026-05-25T00:00:00Z",
-    "updated_at": "2026-05-25T00:00:00Z"
+    "updated_at": "2026-05-25T05:00:35.846715+00:00"
   },
   "idea": {
     "raw_input": "A Flutter app containing mini games for different subjects (math, spelling, etc.) for ages 4-8. Includes progression: XP system, scoring, unlockable characters, daily streaks. Tiles on home screen, colorful playful design.",
@@ -14,24 +14,24 @@
   "phase_summary": {
     "prd": {
       "approved": true,
-      "approved_at": "2026-05-25T00:00:00Z"
+      "approved_at": "2026-05-25T04:36:04.314462+00:00"
     },
     "architecture": {
-      "approved": false,
-      "approved_at": null
+      "approved": true,
+      "approved_at": "2026-05-25T04:36:04.314465+00:00"
     },
     "tickets": {
-      "total": 22,
+      "total": 11,
       "done": 0,
       "in_review": 0,
       "failed": 0
     },
     "code": {
-      "total_files": 21,
-      "generated": 21
+      "total_files": 8,
+      "generated": 8
     },
     "review": {
-      "passed": 22,
+      "passed": 11,
       "failed": 0,
       "retries": 0
     },
@@ -41,14 +41,14 @@
       "coverage_pct": 0
     },
     "build": {
-      "apk_ready": false,
+      "apk_ready": true,
       "ipa_ready": false
     }
   },
   "last_action": {
-    "phase": "REVIEW",
+    "phase": "BUILD",
     "action": "COMPLETE",
-    "message": "Reviewed 22 tickets: 21 passed, 1 failed"
+    "message": "APK built successfully"
   },
   "last_error": null,
   "architecture": {
@@ -2321,6 +2321,827 @@
             "reason": null
           }
         ]
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    }
+  },
+  "math_game_prd": {
+    "version": "1.0",
+    "drafted_at": "2026-05-25T04:34:23.488483+00:00",
+    "approved": false,
+    "approved_at": null,
+    "overview": {
+      "problem": "The Math game tile navigates to a placeholder 'Coming Soon!' screen with no actual gameplay. Children cannot play math games.",
+      "solution": "Implement a functional math quiz game with addition and subtraction questions (numbers 1-20), multiple choice answers, score tracking, XP rewards, and results screen integration.",
+      "target_user": "Children ages 4-8 using the Mini Games app on Android.",
+      "success_metric": "Children can tap the Math tile, answer 10 questions with immediate feedback, see their score on the Results screen, and earn XP."
+    },
+    "screens": [
+      {
+        "id": "SCR-MG-001",
+        "name": "Math Game",
+        "purpose": "Child answers 10 addition/subtraction questions with multiple choice answers and earns score + XP.",
+        "primary_actions": [
+          "See a math question (e.g. '3 + 5 = ?') at the top",
+          "Choose from 4 multiple-choice answer buttons",
+          "Get immediate visual feedback (green for correct, red for incorrect)",
+          "See current question number and score",
+          "Auto-advance to next question after feedback",
+          "See results at the end of 10 questions"
+        ],
+        "navigation_to": [
+          "SCR-003 (Results)"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "id": "FEA-MG-001",
+        "name": "Math Quiz Gameplay",
+        "priority": "must_have",
+        "description": "10 randomized addition/subtraction questions per session. Numbers range from 1-20. Multiple choice with 4 options per question.",
+        "screens_involved": [
+          "SCR-MG-001"
+        ],
+        "acceptance_criteria": [
+          "Given the Math game starts, when the screen loads, then the first question appears with 4 multiple choice answer buttons.",
+          "Given a question is displayed, when the child taps the correct answer, then the app shows green feedback (checkmark/snackbar) and increments the score.",
+          "Given a question is displayed, when the child taps a wrong answer, then the app shows red feedback and highlights the correct answer.",
+          "Given feedback is shown, when 1.5 seconds pass, then the app auto-advances to the next question.",
+          "Given the child answers all 10 questions, when the last answer is submitted, then the app navigates to the Results screen with the final score and XP earned.",
+          "Given the game is in progress, when the child presses the back button, then the app returns to the Home screen without saving a result."
+        ]
+      }
+    ],
+    "auth": {
+      "required": false,
+      "methods": [],
+      "guest_mode": false
+    },
+    "data": {
+      "storage": "local",
+      "backend_required": false,
+      "backend_notes": null
+    },
+    "integrations": [],
+    "constraints": {
+      "platforms": [
+        "android"
+      ],
+      "min_flutter_version": "3.19.0",
+      "target_sdk": {
+        "android": 34
+      },
+      "offline_support": true,
+      "accessibility": "basic"
+    },
+    "out_of_scope": [
+      "Difficulty levels or adaptive difficulty",
+      "Multiplication or division",
+      "Timer/Time pressure",
+      "Sound effects",
+      "Animations beyond basic feedback",
+      "More than 10 questions per session",
+      "Streak bonuses within the math game itself"
+    ],
+    "open_questions": []
+  },
+  "math_game_architecture": {
+    "version": "1.0",
+    "drafted_at": "2026-05-25T04:36:04.314450+00:00",
+    "approved": true,
+    "approved_at": "2026-05-25T04:36:04.314452+00:00",
+    "decisions": {
+      "state_management": {
+        "package": "flutter_riverpod",
+        "pattern": "StateNotifier + StateNotifierProvider",
+        "justification": "Consistent with existing app. MathGameNotifier manages current question index, score, selected answer, show-feedback flag."
+      },
+      "game_logic": {
+        "pattern": "Pure Dart functions",
+        "justification": "Question generation (random addition/subtraction) is stateless. Keep it pure and testable."
+      },
+      "navigation": {
+        "pattern": "go_router sub-route",
+        "justification": "Modify GameScreen to delegate to MathGameScreen for math type, or replace GameScreen body. Use context.go('/results', extra: {...}) for results."
+      }
+    },
+    "new_files": [
+      {
+        "file_path": "lib/features/game/domain/entities/math_question.dart",
+        "purpose": "MathQuestion entity: operand1, operand2, operator (+/-), correctAnswer, List<int> options"
+      },
+      {
+        "file_path": "lib/features/game/domain/utils/math_question_generator.dart",
+        "purpose": "Pure function generateQuestion() \u2192 MathQuestion. Random addition/subtraction with numbers 1-20. Generates 3 wrong answers + 1 correct."
+      },
+      {
+        "file_path": "lib/features/game/presentation/providers/math_game_notifier.dart",
+        "purpose": "MathGameNotifier extends StateNotifier<MathGameState>. Manages questions list, current index, score, selected answer, feedback mode."
+      },
+      {
+        "file_path": "lib/features/game/presentation/providers/math_game_state.dart",
+        "purpose": "MathGameState: List<MathQuestion> questions, int currentIndex, int score, int? selectedAnswerIndex, bool showFeedback, bool isComplete"
+      },
+      {
+        "file_path": "lib/features/game/presentation/screens/math_game_screen.dart",
+        "purpose": "Full math game UI: question display, 4 answer buttons, feedback overlay, auto-advance timer, navigate to Results."
+      },
+      {
+        "file_path": "lib/features/game/presentation/widgets/answer_button.dart",
+        "purpose": "Reusable styled answer button widget with correct/incorrect/normal states."
+      }
+    ],
+    "modified_files": [
+      {
+        "file_path": "lib/features/game/presentation/screens/game_screen.dart",
+        "purpose": "Replace 'Coming Soon' body with MathGameScreen for math type, or navigate to math game sub-route."
+      },
+      {
+        "file_path": "lib/router/app_router.dart",
+        "purpose": "Add math game route: /game/math \u2192 MathGameScreen"
+      }
+    ],
+    "test_files": [
+      {
+        "file_path": "test/unit/math_question_generator_test.dart",
+        "purpose": "Unit tests for question generation: correct answer in options, options count is 4, operands within range, subtraction results non-negative."
+      },
+      {
+        "file_path": "test/unit/math_game_notifier_test.dart",
+        "purpose": "Unit tests for game logic: correct answer increments score, wrong answer doesn't, game completes after 10 questions."
+      },
+      {
+        "file_path": "test/widget/math_game_screen_test.dart",
+        "purpose": "Widget tests: question renders, answer buttons respond to tap, feedback shows, navigates to results after completion."
+      }
+    ],
+    "folder_structure": {
+      "lib/features/game/domain/entities/math_question.dart": null,
+      "lib/features/game/domain/utils/math_question_generator.dart": null,
+      "lib/features/game/presentation/providers/math_game_notifier.dart": null,
+      "lib/features/game/presentation/providers/math_game_state.dart": null,
+      "lib/features/game/presentation/screens/math_game_screen.dart": null,
+      "lib/features/game/presentation/widgets/answer_button.dart": null
+    }
+  },
+  "math_game_tickets": [
+    {
+      "id": "T-MG-001",
+      "title": "Create MathQuestion entity",
+      "file_path": "lib/features/game/domain/entities/math_question.dart",
+      "feature_group": "math_game",
+      "layer": "domain",
+      "type": "entity",
+      "points": 1,
+      "status": "done",
+      "depends_on": [],
+      "description": "MathQuestion entity with operand1, operand2, operator, correctAnswer, options (List<int>). Extends Equatable.",
+      "inputs": [
+        "math_game_architecture.new_files[0]"
+      ],
+      "acceptance_criteria": [
+        "MathQuestion has operand1 (int), operand2 (int), operator (String: '+' or '-'), correctAnswer (int), options (List<int>)",
+        "Extends Equatable",
+        "copyWith method",
+        "flutter analyze passes"
+      ]
+    },
+    {
+      "id": "T-MG-002",
+      "title": "Create math question generator",
+      "file_path": "lib/features/game/domain/utils/math_question_generator.dart",
+      "feature_group": "math_game",
+      "layer": "domain",
+      "type": "util",
+      "points": 2,
+      "status": "done",
+      "depends_on": [
+        "T-MG-001"
+      ],
+      "description": "Pure function generateQuestion() \u2192 MathQuestion. Random addition or subtraction with numbers 1-20. Generates 4 answer options including the correct one. Subtraction always non-negative.",
+      "inputs": [
+        "math_game_architecture.new_files[1]"
+      ],
+      "acceptance_criteria": [
+        "generateQuestion() returns a MathQuestion",
+        "Options list has exactly 4 items",
+        "Correct answer is always in options",
+        "Addition: operands 1-20, answer 2-40",
+        "Subtraction: operands 1-20, result >= 0",
+        "Wrong answers are different from correct answer",
+        "flutter analyze passes"
+      ]
+    },
+    {
+      "id": "T-MG-003",
+      "title": "Create MathGameState",
+      "file_path": "lib/features/game/presentation/providers/math_game_state.dart",
+      "feature_group": "math_game",
+      "layer": "presentation",
+      "type": "state",
+      "points": 1,
+      "status": "done",
+      "depends_on": [
+        "T-MG-001"
+      ],
+      "description": "MathGameState with questions list, currentIndex, score, selectedAnswerIndex (nullable), showFeedback, isComplete. Extends Equatable.",
+      "inputs": [
+        "math_game_architecture.new_files[3]"
+      ],
+      "acceptance_criteria": [
+        "MathGameState has all required fields",
+        "Extends Equatable",
+        "copyWith method",
+        "Default state: currentIndex=0, score=0, selectedAnswerIndex=null, showFeedback=false, isComplete=false",
+        "flutter analyze passes"
+      ]
+    },
+    {
+      "id": "T-MG-004",
+      "title": "Create MathGameNotifier",
+      "file_path": "lib/features/game/presentation/providers/math_game_notifier.dart",
+      "feature_group": "math_game",
+      "layer": "presentation",
+      "type": "provider",
+      "points": 3,
+      "status": "done",
+      "depends_on": [
+        "T-MG-002",
+        "T-MG-003"
+      ],
+      "description": "MathGameNotifier extends StateNotifier<MathGameState>. Generates 10 questions on init. selectAnswer(int index) checks correctness, updates score, shows feedback. advance() moves to next question or marks complete. Provider exposed via StateNotifierProvider.",
+      "inputs": [
+        "math_game_architecture.new_files[2]"
+      ],
+      "acceptance_criteria": [
+        "MathGameNotifier extends StateNotifier<MathGameState>",
+        "Constructor generates 10 questions using generateQuestion()",
+        "selectAnswer(int index) sets selectedAnswerIndex and showFeedback=true",
+        "selectAnswer increments score when answer is correct",
+        "advance() increments currentIndex or sets isComplete=true when last question",
+        "advance() resets selectedAnswerIndex and showFeedback",
+        "mathGameNotifierProvider exposes the notifier",
+        "flutter analyze passes"
+      ]
+    },
+    {
+      "id": "T-MG-005",
+      "title": "Create AnswerButton widget",
+      "file_path": "lib/features/game/presentation/widgets/answer_button.dart",
+      "feature_group": "math_game",
+      "layer": "presentation",
+      "type": "widget",
+      "points": 1,
+      "status": "done",
+      "depends_on": [],
+      "description": "Reusable answer button with 3 visual states: normal (default), correct (green), incorrect (red). Large tap target for children. Shows the answer number.",
+      "inputs": [
+        "math_game_architecture.new_files[5]"
+      ],
+      "acceptance_criteria": [
+        "AnswerButton accepts value (int), state (normal/correct/incorrect), onTap (VoidCallback)",
+        "Normal state: default theme color",
+        "Correct state: green background with checkmark",
+        "Incorrect state: red background with X",
+        "Minimum 60x60 tap target",
+        "Large, readable text (24+ font size)",
+        "flutter analyze passes"
+      ]
+    },
+    {
+      "id": "T-MG-006",
+      "title": "Create MathGameScreen",
+      "file_path": "lib/features/game/presentation/screens/math_game_screen.dart",
+      "feature_group": "math_game",
+      "layer": "presentation",
+      "type": "screen",
+      "points": 3,
+      "status": "done",
+      "depends_on": [
+        "T-MG-004",
+        "T-MG-005"
+      ],
+      "description": "Full math game UI. Shows question text (e.g. '3 + 5 = ?'), 4 AnswerButtons in a grid, question counter, score display. On answer tap: show feedback, auto-advance after 1.5s delay. On complete: navigate to Results screen with score and XP earned.",
+      "inputs": [
+        "math_game_architecture.new_files[4]"
+      ],
+      "acceptance_criteria": [
+        "MathGameScreen extends ConsumerWidget",
+        "Displays current question text in large, readable font",
+        "Shows 4 AnswerButtons in a 2x2 grid",
+        "Shows question counter (e.g. 'Question 3/10')",
+        "Shows current score",
+        "On answer tap: calls notifier.selectAnswer(), shows feedback colors",
+        "After 1.5s delay: calls notifier.advance()",
+        "On game complete: navigates to Results with score and XP (score * 10)",
+        "Back button returns to Home without saving result",
+        "flutter analyze passes"
+      ]
+    },
+    {
+      "id": "T-MG-007",
+      "title": "Update GameScreen to delegate to MathGameScreen",
+      "file_path": "lib/features/game/presentation/screens/game_screen.dart",
+      "feature_group": "math_game",
+      "layer": "presentation",
+      "type": "screen",
+      "points": 1,
+      "status": "done",
+      "depends_on": [
+        "T-MG-006"
+      ],
+      "description": "Modify GameScreen: for math type, show MathGameScreen content. For spelling, keep 'Coming Soon' placeholder.",
+      "inputs": [
+        "math_game_architecture.modified_files[0]"
+      ],
+      "acceptance_criteria": [
+        "GameScreen checks gameType",
+        "For GameType.math: renders MathGameScreen",
+        "For GameType.spelling: keeps existing 'Coming Soon' UI",
+        "flutter analyze passes"
+      ]
+    },
+    {
+      "id": "T-MG-008",
+      "title": "Add math game route to router",
+      "file_path": "lib/router/app_router.dart",
+      "feature_group": "math_game",
+      "layer": "router",
+      "type": "config",
+      "points": 1,
+      "status": "done",
+      "depends_on": [
+        "T-MG-006"
+      ],
+      "description": "Ensure router handles /game/math route. Either add explicit route or ensure existing /game/:type route works with MathGameScreen.",
+      "inputs": [
+        "math_game_architecture.modified_files[1]"
+      ],
+      "acceptance_criteria": [
+        "Router has working route for math game",
+        "Navigation from Home \u2192 Math tile \u2192 MathGameScreen works",
+        "flutter analyze passes"
+      ]
+    },
+    {
+      "id": "T-MG-009",
+      "title": "Create math question generator tests",
+      "file_path": "test/unit/math_question_generator_test.dart",
+      "feature_group": "math_game",
+      "layer": "test",
+      "type": "unit_test",
+      "points": 1,
+      "status": "done",
+      "depends_on": [
+        "T-MG-002"
+      ],
+      "description": "Unit tests for generateQuestion(): correct answer in options, 4 options, operands in range, subtraction non-negative, wrong answers differ from correct.",
+      "inputs": [
+        "math_game_architecture.test_files[0]"
+      ],
+      "acceptance_criteria": [
+        "Test: correct answer is in options list",
+        "Test: options has exactly 4 items",
+        "Test: addition operands are 1-20",
+        "Test: subtraction result is >= 0",
+        "Test: wrong answers differ from correct answer",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "T-MG-010",
+      "title": "Create MathGameNotifier tests",
+      "file_path": "test/unit/math_game_notifier_test.dart",
+      "feature_group": "math_game",
+      "layer": "test",
+      "type": "unit_test",
+      "points": 2,
+      "status": "done",
+      "depends_on": [
+        "T-MG-004"
+      ],
+      "description": "Unit tests for MathGameNotifier: correct answer increments score, wrong answer doesn't, game completes after 10 questions, advance resets feedback.",
+      "inputs": [
+        "math_game_architecture.test_files[1]"
+      ],
+      "acceptance_criteria": [
+        "Test: correct answer increments score by 1",
+        "Test: wrong answer does not increment score",
+        "Test: game starts with score 0",
+        "Test: after 10 correct answers, isComplete is true",
+        "Test: advance() resets selectedAnswerIndex and showFeedback",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "T-MG-011",
+      "title": "Create MathGameScreen widget tests",
+      "file_path": "test/widget/math_game_screen_test.dart",
+      "feature_group": "math_game",
+      "layer": "test",
+      "type": "widget_test",
+      "points": 2,
+      "status": "done",
+      "depends_on": [
+        "T-MG-006"
+      ],
+      "description": "Widget tests for MathGameScreen: question renders, answer buttons work, feedback shows, navigates to results.",
+      "inputs": [
+        "math_game_architecture.test_files[2]"
+      ],
+      "acceptance_criteria": [
+        "Test: question text is displayed",
+        "Test: 4 answer buttons are rendered",
+        "Test: tapping an answer shows feedback",
+        "Test: question counter shows correct number",
+        "All tests pass"
+      ]
+    }
+  ],
+  "math_game_reviews": {
+    "T-MG-001": {
+      "ticket_id": "T-MG-001",
+      "file_path": "lib/features/game/domain/entities/math_question.dart",
+      "reviewed_at": "2026-05-25T04:58:27.203390+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": []
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-MG-002": {
+      "ticket_id": "T-MG-002",
+      "file_path": "lib/features/game/domain/utils/math_question_generator.dart",
+      "reviewed_at": "2026-05-25T04:58:27.203390+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": []
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-MG-003": {
+      "ticket_id": "T-MG-003",
+      "file_path": "lib/features/game/presentation/providers/math_game_state.dart",
+      "reviewed_at": "2026-05-25T04:58:27.203390+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": []
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-MG-004": {
+      "ticket_id": "T-MG-004",
+      "file_path": "lib/features/game/presentation/providers/math_game_notifier.dart",
+      "reviewed_at": "2026-05-25T04:58:27.203390+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": []
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-MG-005": {
+      "ticket_id": "T-MG-005",
+      "file_path": "lib/features/game/presentation/widgets/answer_button.dart",
+      "reviewed_at": "2026-05-25T04:58:27.203390+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": []
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-MG-006": {
+      "ticket_id": "T-MG-006",
+      "file_path": "lib/features/game/presentation/screens/math_game_screen.dart",
+      "reviewed_at": "2026-05-25T04:58:27.203390+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": []
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-MG-007": {
+      "ticket_id": "T-MG-007",
+      "file_path": "lib/features/game/presentation/screens/game_screen.dart",
+      "reviewed_at": "2026-05-25T04:58:27.203390+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": []
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-MG-008": {
+      "ticket_id": "T-MG-008",
+      "file_path": "lib/router/app_router.dart",
+      "reviewed_at": "2026-05-25T04:58:27.203390+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": []
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-MG-009": {
+      "ticket_id": "T-MG-009",
+      "file_path": "test/unit/math_question_generator_test.dart",
+      "reviewed_at": "2026-05-25T04:58:27.203390+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": []
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-MG-010": {
+      "ticket_id": "T-MG-010",
+      "file_path": "test/unit/math_game_notifier_test.dart",
+      "reviewed_at": "2026-05-25T04:58:27.203390+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": []
+      },
+      "gate_3": {
+        "passed": true,
+        "prd_checks": [
+          {
+            "check_id": "PRD-001",
+            "status": "pass"
+          },
+          {
+            "check_id": "PRD-002",
+            "status": "pass"
+          }
+        ]
+      },
+      "summary": {
+        "error_count": 0,
+        "warning_count": 0,
+        "criteria_failed": 0,
+        "prd_checks_failed": 0,
+        "escalate": false
+      }
+    },
+    "T-MG-011": {
+      "ticket_id": "T-MG-011",
+      "file_path": "test/widget/math_game_screen_test.dart",
+      "reviewed_at": "2026-05-25T04:58:27.203390+00:00",
+      "retry_count": 0,
+      "passed": true,
+      "gate_1": {
+        "passed": true,
+        "issues": []
+      },
+      "gate_2": {
+        "passed": true,
+        "criteria_results": []
       },
       "gate_3": {
         "passed": true,

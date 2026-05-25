@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import '../../features/game/domain/entities/game_result.dart';
 import '../../features/game/presentation/screens/game_screen.dart';
+import '../../features/game/presentation/screens/math_game_screen.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
 import '../../features/results/presentation/screens/results_screen.dart';
@@ -13,6 +14,11 @@ final GoRouter appRouter = GoRouter(
       path: HomeScreen.routePath,
       name: HomeScreen.routeName,
       builder: (context, state) => const HomeScreen(),
+    ),
+    GoRoute(
+      path: MathGameScreen.routePath,
+      name: MathGameScreen.routeName,
+      builder: (context, state) => const MathGameScreen(),
     ),
     GoRoute(
       path: GameScreen.routePath,

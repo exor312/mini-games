@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '../../../game/domain/entities/game_result.dart';
+import 'math_game_screen.dart';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({super.key, required this.gameType});
@@ -12,6 +12,11 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (gameType == GameType.math) {
+      return const MathGameScreen();
+    }
+
+    // Spelling and other games: placeholder
     final cs = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -40,11 +45,6 @@ class GameScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: cs.onSurfaceVariant,
                   ),
-            ),
-            const SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: () => context.go('/'),
-              child: const Text('Back to Home'),
             ),
           ],
         ),
